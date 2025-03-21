@@ -37,7 +37,7 @@ func init() {
 	rootCmd.AddCommand(printRangeCmd)
 
 	printRangeCmd.PersistentFlags().BoolVarP(&printAnsi16FG, "ansi16", "a", true, "Print the ANSI 16 range of foreground colors")
-	printRangeCmd.PersistentFlags().BoolVarP(&print256Fg, "xterm256", "x", true, "Print the xterm-256 froeground color")
+	printRangeCmd.PersistentFlags().BoolVarP(&print256Fg, "xterm256", "x", false, "Print the xterm-256 froeground color")
 
 }
 
