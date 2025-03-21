@@ -26,17 +26,21 @@ var printRangeCmd = &cobra.Command{
 		fmt.Println()
 		if printAnsi16FG {
 			printAnsi16Fg()
+			return
 		}
 		if print256Fg {
 			printXterm256Fg()
+			return
 		}
+
+		printAnsi16Fg()
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(printRangeCmd)
 
-	printRangeCmd.PersistentFlags().BoolVarP(&printAnsi16FG, "ansi16", "a", true, "Print the ANSI 16 range of foreground colors")
+	printRangeCmd.PersistentFlags().BoolVarP(&printAnsi16FG, "ansi16", "a", false, "Print the ANSI 16 range of foreground colors")
 	printRangeCmd.PersistentFlags().BoolVarP(&print256Fg, "xterm256", "x", false, "Print the xterm-256 froeground color")
 
 }
