@@ -60,14 +60,7 @@ func PrintHeaderMessage(msg string, sepChar string) string {
 	heightFloat := math.RoundToEven(float64(height) / 4.0)
 	headerHeightInt := int(heightFloat)
 	midWidth := int(math.RoundToEven(float64(width) / 2.0))
-	fmt.Printf("width %d\n", width)
-
-	fmt.Printf("midWidth %d\n", midWidth)
-	fmt.Printf("len(msg) %d\n", len(msg))
-
 	msgStart := midWidth - len(msg)
-	fmt.Printf("messageStart %d\n", msgStart)
-
 	hdrBodyHeight := headerHeightInt - 2
 	hdrBodyHalf := int(math.RoundToEven(float64(hdrBodyHeight) / 2.0))
 	msgLinePaddingRight := midWidth - 2
