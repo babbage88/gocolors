@@ -35,7 +35,7 @@ func BuildSeperatorHorizontal(sepChar string) string {
 		sepChars.WriteString(sepChar)
 	}
 
-	sepChar.WriteString("\n")
+	sepChars.WriteString("\n")
 	return sepChars.String()
 }
 
@@ -60,23 +60,42 @@ func PrintHeaderMessage(msg string, sepChar string) string {
 	heightFloat := math.RoundToEven(float64(height) / 4.0)
 	headerHeightInt := int(heightFloat)
 	midWidth := int(math.RoundToEven(float64(width) / 2.0))
+	fmt.Printf("width %d\n", width)
+
+	fmt.Printf("midWidth %d\n", midWidth)
+	fmt.Printf("len(msg) %d\n", len(msg))
+
 	msgStart := midWidth - len(msg)
+	fmt.Printf("messageStart %d\n", msgStart)
+
 	hdrBodyHeight := headerHeightInt - 2
 	hdrBodyHalf := int(math.RoundToEven(float64(hdrBodyHeight) / 2.0))
+	msgLinePaddingRight := midWidth - 2
+
 	headerMessage.WriteString(BuildSeperatorHorizontal(sepChar))
 
-	for i := 0; i < hdrBodyHalf; i++ {
-		headerMessage.WriteString(sepChar)
-		for w := 0; w < width-2; i++ {
-			headerMessage.WriteString(" ")
-		}
-		headerMessage.WriteString(sepChar)
-		headerMessage.WriteString("\n")
-	}
+	buildHeaderBody(hdrBodyHalf, width, sepChar, &headerMessage)
 
 	headerMessage.WriteString("#")
 	headerMessage.WriteString(BuildNString(msgStart, " "))
 	headerMessage.WriteString(msg)
+	headerMessage.WriteString(BuildNString(msgLinePaddingRight, " "))
+	headerMessage.WriteString(sepChar)
+	headerMessage.WriteString("\n")
+
+	buildHeaderBody(hdrBodyHalf, width, sepChar, &headerMessage)
+	headerMessage.WriteString(BuildSeperatorHorizontal(sepChar))
 
 	return headerMessage.String()
+}
+
+func buildHeaderBody(height int, width int, sepChar string, headerBuilder *strings.Builder) {
+	for x := 0; x < height; x++ {
+		headerBuilder.WriteString(sepChar)
+		for y := 0; y < width-2; y++ {
+			headerBuilder.WriteString(" ")
+		}
+		headerBuilder.WriteString(sepChar)
+		headerBuilder.WriteString("\n")
+	}
 }
